@@ -1,5 +1,5 @@
 const loadFileString = async () => {
-  const file = Bun.file("data.txt");
+  const file = Bun.file(`${import.meta.dir}/data.txt`);
   return await file.text();
 };
 
