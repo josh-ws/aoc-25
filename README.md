@@ -20,6 +20,6 @@ Replacing `01` with the puzzle to run.
 
 ## Dev
 
-Create a new folder in the `puzzles` subdirectory, using `template` as a guide.
+Create a new folder in the `puzzles` subdirectory and add the puzzle input into the `input` subdirectory. It's mostly a manual process.
 
 This project was created using `bun init` in bun v1.3.0. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.

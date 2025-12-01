@@ -1,9 +1,6 @@
-const START_POSITION = 50;
+import { loadFileSplitLines, loadFileString } from "../util";
 
-const loadFileString = async () => {
-  const file = Bun.file(`${import.meta.dir}/data.txt`);
-  return await file.text();
-};
+const START_POSITION = 50;
 
 const part1 = (lines: string[]) => {
   let i = START_POSITION;
@@ -39,10 +36,9 @@ export const part2 = (lines: string[]) => {
 };
 
 const run = async () => {
-  const content = await loadFileString();
-  const lines = content.split("\n").filter((x) => x !== "");
-  console.log("Part 1:", part1(lines));
-  console.log("Part 2:", part2(lines));
+  const content = await loadFileSplitLines("input/01.txt");
+  console.log("Part 1:", part1(content));
+  console.log("Part 2:", part2(content));
 };
 
 await run();
