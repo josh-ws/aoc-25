@@ -26,9 +26,9 @@ export const part2 = (lines: string[]) => {
 
   for (const line of lines) {
     const isLeft = line[0] === "L";
-    const sum = parseInt(line.substring(1)) * (isLeft ? -1 : 1);
+    const tot = parseInt(line.substring(1));
 
-    for (let i = 0; i < Math.abs(sum); i++) {
+    for (let i = 0; i < tot; i++) {
       cur = (cur + (isLeft ? -1 : 1)) % 100;
       if (cur === 0) {
         zeros += 1;
