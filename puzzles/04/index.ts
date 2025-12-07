@@ -37,7 +37,7 @@ const part1 = async () => {
   const grid = lines.map((x) => x.split("")) as Grid;
   let sum = 0;
   for (let y = 0; y < grid.length; y++) {
-    for (let x = 0; x < grid[0].length; x++) {
+    for (let x = 0; x < grid[0]!.length; x++) {
       const isRoll = getPoint(grid, x, y) === "@";
       const isBelowThreshold = countAdjacent(grid, x, y) < THRESHOLD;
       if (isRoll && isBelowThreshold) {
@@ -55,7 +55,7 @@ const part2 = async () => {
   while (true) {
     let currentTot = 0;
     for (let y = 0; y < grid.length; y++) {
-      for (let x = 0; x < grid[0].length; x++) {
+      for (let x = 0; x < grid[0]!.length; x++) {
         const isRoll = getPoint(grid, x, y) === "@";
         const isBelowThreshold = countAdjacent(grid, x, y) < THRESHOLD;
         if (isRoll && isBelowThreshold) {
