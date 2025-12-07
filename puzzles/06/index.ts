@@ -2,7 +2,7 @@ import { loadFileSplitLines, loadFileString } from "../util";
 
 type Calculation = {
   n: number[];
-  op: "*" | "+";
+  op: string;
 };
 
 const doCalculation = (c: Calculation): number => {
@@ -30,19 +30,44 @@ const parseTopBottom = (data: string[][]): Calculation[] => {
   return calcs;
 };
 
-const part1 = async (data: string[][]): Promise<number> => {
-  const calcs = parseTopBottom(data);
+const part1 = async (): Promise<number> => {
+  const data = await loadFileSplitLines("input/06.txt");
+  const split = data.map((x) => x.split(" ").filter((x) => x !== ""));
+
+  const calcs = parseTopBottom(split);
   return calcs.map(doCalculation).reduce((prev, curr) => prev + curr, 0);
 };
 
 const part2 = async (): Promise<number> => {
-  return 0;
+  const data = await loadFileSplitLines("input/06.txt");
+
+  let calcs: Calculation[] = [];
+  let nums: string[] = [];
+  let num = "";
+  let op = "";
+  for (let i = data[0]!.length - 1; i >= 0; i--) {
+    for (let j = 0; j < data.length; j++) {
+      const line = data[j];
+      if (j === data.length - 1) {
+        if (num !== "") {
+          nums = [...nums, num];
+        }
+        if (line![i] === "*" || line![i] === "+") {
+          op = line![i]!;
+          calcs = [...calcs, { op, n: nums.map((n) => parseInt(n)) }];
+          nums = [];
+        }
+        num = "";
+      } else if (line![i] !== " ") {
+        num += line![i];
+      }
+    }
+  }
+  return calcs.map(doCalculation).reduce((prev, curr) => prev + curr, 0);
 };
 
 const run = async () => {
-  const data = await loadFileSplitLines("input/06.txt");
-  const split = data.map((x) => x.split(" ").filter((x) => x !== ""));
-  console.log("part 1", await part1(split));
+  console.log("part 1", await part1());
   console.log("part 2", await part2());
 };
 
